@@ -8,43 +8,37 @@
  *
  * @author sdogu
  */
-
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortDataListener;
-import com.fazecast.jSerialComm.SerialPortEvent;
-import java.io.BufferedReader;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import java.io.OutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
-
 public class MainJFrame extends javax.swing.JFrame {
-    
-    
-    SerialPort serialPort1;
-    OutputStream outputStream1;
-    String dataBuffer = "";
-    String line = "";
 
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
-        
-        
-        
-                
-        
-        
-        
-        
+
+        SerialThread SerialThread = new SerialThread();
+        SerialThread.PortConfig();
+        Thread Indicator;
+        Indicator = new Thread() {
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    jLabel_ind.setText(SerialThread.veri());
+                }
+            }
+        };
+        Indicator.start();
+
     }
 
     /**
@@ -111,29 +105,9 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         PortSettingsJFrame portSettingsFrame = new PortSettingsJFrame();
         portSettingsFrame.setVisible(true);
-           
+
     }//GEN-LAST:event_jMenuItem_portSettingsActionPerformed
 
-    private void Serial_EventBasedReading(SerialPort activePort){
-        activePort.addDataListener(new SerialPortDataListener(){
-        @Override
-        public int getListeningEvents(){return SerialPort.LISTENING_EVENT_DATA_RECEIVED;}
-        @Override
-        public void serialEvent(SerialPortEvent event){
-                byte []newData = event.getReceivedData();
-                for(int i=0; i<newData.length;i++){
-                dataBuffer += (char)newData[i];
-                }
-                line = dataBuffer.substring(7,14);
-                float f = Float.parseFloat(line);
-                line = Float.toString(f);
-                jLabel_ind.setText(line);
-                dataBuffer="";
-        }
-   });
-
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -165,6 +139,7 @@ public class MainJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainJFrame().setVisible(true);
+
             }
         });
     }
