@@ -8,9 +8,6 @@
  *
  * @author sdogu
  */
-import com.fazecast.jSerialComm.SerialPort;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +30,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    jLabel_ind.setText(SerialThread.veri());
+                    jLabel_ind.setText(SerialThread.parseWeight()+"kg");
                 }
             }
         };
@@ -50,23 +47,170 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jLabel_ind = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel_alan1 = new javax.swing.JLabel();
+        jTextField_alan1 = new javax.swing.JTextField();
+        jLabel_alan2 = new javax.swing.JLabel();
+        jTextField_alan2 = new javax.swing.JTextField();
+        jTextField_alan3 = new javax.swing.JTextField();
+        jLabel_alan3 = new javax.swing.JLabel();
+        jLabel_alan4 = new javax.swing.JLabel();
+        jTextFieldalan4 = new javax.swing.JTextField();
+        jLabel_alan5 = new javax.swing.JLabel();
+        jTextField_alan5 = new javax.swing.JTextField();
+        jLabel_alan6 = new javax.swing.JLabel();
+        jTextField_alan6 = new javax.swing.JTextField();
+        jTextField_aciklama = new javax.swing.JTextField();
+        jLabel_aciklama = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem_portSettings = new javax.swing.JMenuItem();
+        jMenuItem_alanAyar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sancaklı Tartı");
 
-        jLabel_ind.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel_ind.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel_ind.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_ind.setText("KG");
         jLabel_ind.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel_ind, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel_ind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+        );
+
+        jLabel_alan1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_alan1.setText("Alan 1");
+
+        jTextField_alan1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_alan1.setText("jTextField1");
+
+        jLabel_alan2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_alan2.setText("Alan 2");
+
+        jTextField_alan2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_alan2.setText("jTextField1");
+
+        jTextField_alan3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_alan3.setText("jTextField1");
+
+        jLabel_alan3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_alan3.setText("Alan 3");
+
+        jLabel_alan4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_alan4.setText("Alan 4");
+
+        jTextFieldalan4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldalan4.setText("jTextField1");
+
+        jLabel_alan5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_alan5.setText("Alan 5");
+
+        jTextField_alan5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_alan5.setText("jTextField1");
+
+        jLabel_alan6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_alan6.setText("Alan 6");
+
+        jTextField_alan6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_alan6.setText("jTextField1");
+
+        jTextField_aciklama.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_aciklama.setText("jTextField1");
+
+        jLabel_aciklama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_aciklama.setText("Açıklama");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_alan1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_alan1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_alan2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_alan2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_alan3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_alan3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_alan4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldalan4, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_alan5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_alan5, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_alan6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_alan6, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_aciklama, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_alan1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jLabel_alan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_alan2)
+                    .addComponent(jLabel_alan2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_alan3)
+                    .addComponent(jLabel_alan3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldalan4)
+                    .addComponent(jLabel_alan4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_alan5)
+                    .addComponent(jLabel_alan5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_alan6)
+                    .addComponent(jLabel_alan6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(136, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Settings");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         jMenuItem_portSettings.setText("Port Settings");
         jMenuItem_portSettings.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +220,14 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem_portSettings);
 
+        jMenuItem_alanAyar.setText("Alan Ayarları");
+        jMenuItem_alanAyar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_alanAyarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem_alanAyar);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -84,17 +236,17 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(258, Short.MAX_VALUE)
-                .addComponent(jLabel_ind, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(221, 221, 221))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(jLabel_ind, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -105,8 +257,19 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         PortSettingsJFrame portSettingsFrame = new PortSettingsJFrame();
         portSettingsFrame.setVisible(true);
+        
 
     }//GEN-LAST:event_jMenuItem_portSettingsActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem_alanAyarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_alanAyarActionPerformed
+        // TODO add your handling code here:
+        AlanAyarJFrame alanAyarFrame = new AlanAyarJFrame();
+        alanAyarFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_alanAyarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,10 +308,27 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel_aciklama;
+    private javax.swing.JLabel jLabel_alan1;
+    private javax.swing.JLabel jLabel_alan2;
+    private javax.swing.JLabel jLabel_alan3;
+    private javax.swing.JLabel jLabel_alan4;
+    private javax.swing.JLabel jLabel_alan5;
+    private javax.swing.JLabel jLabel_alan6;
     private javax.swing.JLabel jLabel_ind;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem_alanAyar;
     private javax.swing.JMenuItem jMenuItem_portSettings;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField_aciklama;
+    private javax.swing.JTextField jTextField_alan1;
+    private javax.swing.JTextField jTextField_alan2;
+    private javax.swing.JTextField jTextField_alan3;
+    private javax.swing.JTextField jTextField_alan5;
+    private javax.swing.JTextField jTextField_alan6;
+    private javax.swing.JTextField jTextFieldalan4;
     // End of variables declaration//GEN-END:variables
 }

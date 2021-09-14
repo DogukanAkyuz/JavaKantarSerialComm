@@ -127,7 +127,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         String uname = jTextField_username.getText();
         String pass = jPasswordField_password.getText();
         
-        if(uname.equals("ss")& pass.equals("ss")){
+        if(uname.equals("s")& pass.equals("s")){
             
           
             MainJFrame mFrame = new MainJFrame();

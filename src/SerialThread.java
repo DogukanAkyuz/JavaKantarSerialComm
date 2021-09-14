@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.io.IOException;
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortDataListener;
-import com.fazecast.jSerialComm.SerialPortEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 
 /**
@@ -23,8 +19,8 @@ public class SerialThread extends Thread {
     public String weight = "";
     public String config = "";
     public String incomingData = "";
-    public String dataBuffer = "";
-    public String line = "";
+    public int firstByte = 0;
+    public int lastByte = 0;
 
     public void PortConfig() {
         try {
@@ -47,6 +43,9 @@ public class SerialThread extends Thread {
         serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 0, 0);
         serialPort.openPort();
 
+        firstByte = Integer.parseInt(configs[5]);
+        lastByte = Integer.parseInt(configs[6]);
+
         Thread SerialPortThread;
         SerialPortThread = new Thread() {
             public void run() {
@@ -65,8 +64,14 @@ public class SerialThread extends Thread {
         SerialPortThread.start();
     }
 
-    public String veri() {
-        return incomingData;
+    public String parseWeight() {
+        if (incomingData.length() > 0) {
+            weight = incomingData.substring(firstByte, lastByte);
+            //weight = Integer.toString(Integer.parseInt(weight));
+            return weight;
+        } else {
+            return "------";
+        }
     }
 
 }

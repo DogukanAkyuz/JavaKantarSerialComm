@@ -1,15 +1,8 @@
 
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortDataListener;
-import com.fazecast.jSerialComm.SerialPortEvent;
-import java.io.BufferedReader;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import java.io.OutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -18,15 +11,15 @@ import java.io.FileWriter;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author sdogu
  */
 public class PortSettingsJFrame extends javax.swing.JFrame {
-    
+
     SerialPort serialPort1;
-    OutputStream outputStream1;
+    public String firstByte = "";
+    public String lastByte = "";
 
     /**
      * Creates new form PortSettingsJFrame
@@ -57,11 +50,14 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
         jComboBox_parityBits = new javax.swing.JComboBox<>();
         jProgressBar_comStatus = new javax.swing.JProgressBar();
         jLabel6 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton_close = new javax.swing.JButton();
+        jLabel_cihaz = new javax.swing.JLabel();
+        jComboBox_cihaz = new javax.swing.JComboBox<>();
+        jLabel_ilkDeger = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jButton_open = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "COM PORT SETTINGS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 204))); // NOI18N
 
@@ -82,11 +78,13 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
         jLabel2.setText("BAUD RATE");
 
         jComboBox_baudRate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4800", "9600", "38400", "57600", "115200" }));
+        jComboBox_baudRate.setSelectedIndex(1);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("DATA BITS");
 
         jComboBox_dataBits.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6", "7", "8" }));
+        jComboBox_dataBits.setSelectedIndex(2);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("STOP BITS");
@@ -98,8 +96,38 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
 
         jComboBox_parityBits.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO_PARITY", "EVEN_PARITY", "ODD_PARITY", "MARK_PARITY", "SPACE_PARITY" }));
 
+        jProgressBar_comStatus.setToolTipText("");
+        jProgressBar_comStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("COM STATUS");
+
+        jLabel_cihaz.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_cihaz.setText("CİHAZ");
+
+        jComboBox_cihaz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOM", "T18", "T1-D", "TEM" }));
+        jComboBox_cihaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_cihazActionPerformed(evt);
+            }
+        });
+
+        jLabel_ilkDeger.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_ilkDeger.setText("İLK- SON CH");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextField2.setVerifyInputWhenFocusTarget(false);
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,12 +135,19 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jProgressBar_comStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_cihaz, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox_cihaz, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_ilkDeger, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
@@ -125,13 +160,17 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
                             .addComponent(jComboBox_baudRate, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox_dataBits, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox_stopBits, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox_parityBits, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox_parityBits, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jProgressBar_comStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox_comPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -151,69 +190,47 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox_parityBits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_cihaz)
+                    .addComponent(jComboBox_cihaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_ilkDeger))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar_comStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jProgressBar_comStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jButton_close.setText("CLOSE");
-        jButton_close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_closeActionPerformed(evt);
-            }
-        });
-
-        jButton_open.setText("OPEN");
+        jButton_open.setText("CONNECT");
         jButton_open.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_openActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jButton_open, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_close, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_open, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_close, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(122, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_open))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_open, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,29 +239,16 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
     private void jComboBox_comPortPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBox_comPortPopupMenuWillBecomeVisible
         // TODO add your handling code here:
         jComboBox_comPort.removeAllItems();
-        SerialPort []portLists = SerialPort.getCommPorts();
-        for(SerialPort port : portLists){
+        SerialPort[] portLists = SerialPort.getCommPorts();
+        for (SerialPort port : portLists) {
             jComboBox_comPort.addItem(port.getSystemPortName());
         }
     }//GEN-LAST:event_jComboBox_comPortPopupMenuWillBecomeVisible
 
-    private void jButton_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_closeActionPerformed
-        // TODO add your handling code here:
-        if(serialPort1.isOpen()){
-            serialPort1.closePort();
-
-            jComboBox_comPort.setEnabled(true);
-            jProgressBar_comStatus.setValue(0);
-            jButton_open.setEnabled(true);
-            jButton_close.setEnabled(false);
-
-        }
-    }//GEN-LAST:event_jButton_closeActionPerformed
-
     private void jButton_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_openActionPerformed
         // TODO add your handling code here:
-        try{
-            SerialPort []portLists = SerialPort.getCommPorts();
+        try {
+            SerialPort[] portLists = SerialPort.getCommPorts();
             serialPort1 = portLists[jComboBox_comPort.getSelectedIndex()];
             serialPort1.setBaudRate(Integer.parseInt(jComboBox_baudRate.getSelectedItem().toString()));
             serialPort1.setNumDataBits(Integer.parseInt(jComboBox_dataBits.getSelectedItem().toString()));
@@ -252,67 +256,93 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
             serialPort1.setParity(jComboBox_parityBits.getSelectedIndex());
             serialPort1.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
             serialPort1.openPort();
-            
-            
 
-            if(serialPort1.isOpen()){
+            if (serialPort1.isOpen()) {
 
-                
-                
-                
-                JOptionPane.showMessageDialog(this,serialPort1.getDescriptivePortName() + " -- Success to OPEN!");
-                
-                 try {
-      File myFile = new File("config.txt");
-      if (myFile.createNewFile()) {
-        System.out.println("File created: " + myFile.getName());
-      } else {
-        System.out.println("File already exists.");
-      }
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-                  try {
-      FileWriter myWriter = new FileWriter("config.txt");
-      myWriter.write(serialPort1.getSystemPortName() + "," + Integer.parseInt(jComboBox_baudRate.getSelectedItem().toString()) + "," + Integer.parseInt(jComboBox_dataBits.getSelectedItem().toString()) + "," + Integer.parseInt(jComboBox_stopBits.getSelectedItem().toString()) + "," + jComboBox_parityBits.getSelectedIndex() );
-      myWriter.close();
-      System.out.println("Successfully wrote to the file.");
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-  
+                switch (jComboBox_cihaz.getSelectedIndex()) {
+                    case 0:
+                        firstByte = jTextField1.getText();
+                        lastByte = jTextField2.getText();
+                        break;
+                    case 1:
+                        firstByte = "7";
+                        lastByte = "14";
+                        break;
+                    case 2:
+                        firstByte = "2";
+                        lastByte = "8";
+                        break;
+                    case 3:
+                        firstByte = "1";
+                        lastByte = "7";
+                        break;
+                    default:
+                        break;
+                }
 
+                try {
+                    File myFile = new File("config.txt");
+                    if (myFile.createNewFile()) {
+                        System.out.println("File created: " + myFile.getName());
+                    } else {
+                        System.out.println("File already exists.");
+                    }
+                } catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                try {
+                    FileWriter myWriter = new FileWriter("config.txt");
+                    myWriter.write(serialPort1.getSystemPortName() + ","
+                            + Integer.parseInt(jComboBox_baudRate.getSelectedItem().toString()) + ","
+                            + Integer.parseInt(jComboBox_dataBits.getSelectedItem().toString()) + ","
+                            + Integer.parseInt(jComboBox_stopBits.getSelectedItem().toString()) + ","
+                            + jComboBox_parityBits.getSelectedIndex() + ","
+                            + firstByte + "," + lastByte);
+                    myWriter.close();
+                    System.out.println("Successfully wrote to the file.");
+                } catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
 
                 jComboBox_comPort.setEnabled(false);
                 jProgressBar_comStatus.setValue(100);
                 jButton_open.setEnabled(false);
-                jButton_close.setEnabled(true);
-                
-                this.setVisible(false);
-                
 
-                //Serial_EventBasedReading(serialPort1);
-                
-              
+                JOptionPane.showMessageDialog(this, serialPort1.getDescriptivePortName() + " -- Success to OPEN!");
+                this.dispose();
 
-            }
-            else{
-                JOptionPane.showMessageDialog(this,serialPort1.getDescriptivePortName() + " -- Failed to OPEN!");
+            } else {
+                JOptionPane.showMessageDialog(this, serialPort1.getDescriptivePortName() + " -- Failed to OPEN!");
             }
 
-        }
-        catch(ArrayIndexOutOfBoundsException a){
+        } catch (ArrayIndexOutOfBoundsException a) {
             JOptionPane.showMessageDialog(this, "Please Choose COM PORT!", "ERROR", ERROR_MESSAGE);
 
-        }
-        catch(Exception b){
+        } catch (Exception b) {
 
             JOptionPane.showMessageDialog(this, b, "ERROR", ERROR_MESSAGE);
 
         }
+
     }//GEN-LAST:event_jButton_openActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jComboBox_cihazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cihazActionPerformed
+        if (jComboBox_cihaz.getSelectedIndex() == 0) {
+            jTextField1.setEnabled(true);
+        } else {
+            jTextField1.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBox_cihazActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,9 +380,9 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_close;
     private javax.swing.JButton jButton_open;
     private javax.swing.JComboBox<String> jComboBox_baudRate;
+    private javax.swing.JComboBox<String> jComboBox_cihaz;
     private javax.swing.JComboBox<String> jComboBox_comPort;
     private javax.swing.JComboBox<String> jComboBox_dataBits;
     private javax.swing.JComboBox<String> jComboBox_parityBits;
@@ -363,12 +393,12 @@ public class PortSettingsJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel_cihaz;
+    private javax.swing.JLabel jLabel_ilkDeger;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar_comStatus;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
-    private void Serial_EventBasedReading(SerialPort serialPort1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
