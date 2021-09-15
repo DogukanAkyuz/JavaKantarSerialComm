@@ -13,8 +13,18 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
     /**
      * Creates new form AlanAyarJFrame
      */
+    database db = new database();
     public AlanAyarJFrame() {
         initComponents();
+        db.readAlan();
+        jTextField_alan1.setText(db.alanlar.get(0));
+        jTextField_alan2.setText(db.alanlar.get(1));
+        jTextField_alan3.setText(db.alanlar.get(2));
+        jTextField_alan4.setText(db.alanlar.get(3));
+        jTextField_alan5.setText(db.alanlar.get(4));
+        jTextField_alan6.setText(db.alanlar.get(5));
+        
+        
     }
 
     /**
@@ -26,28 +36,26 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField_aciklama = new javax.swing.JTextField();
-        jLabel_aciklama = new javax.swing.JLabel();
         jLabel_alan6 = new javax.swing.JLabel();
         jTextField_alan6 = new javax.swing.JTextField();
         jLabel_alan5 = new javax.swing.JLabel();
         jTextField_alan5 = new javax.swing.JTextField();
         jLabel_alan4 = new javax.swing.JLabel();
-        jTextFieldalan4 = new javax.swing.JTextField();
+        jTextField_alan4 = new javax.swing.JTextField();
         jLabel_alan3 = new javax.swing.JLabel();
         jTextField_alan3 = new javax.swing.JTextField();
         jLabel_alan2 = new javax.swing.JLabel();
         jTextField_alan2 = new javax.swing.JTextField();
         jLabel_alan1 = new javax.swing.JLabel();
         jTextField_alan1 = new javax.swing.JTextField();
+        jButton_kaydet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jTextField_aciklama.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField_aciklama.setText("jTextField1");
-
-        jLabel_aciklama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_aciklama.setText("Alan 7");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel_alan6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_alan6.setText("Alan 6");
@@ -64,8 +72,8 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
         jLabel_alan4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_alan4.setText("Alan 4");
 
-        jTextFieldalan4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldalan4.setText("jTextField1");
+        jTextField_alan4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_alan4.setText("jTextField1");
 
         jLabel_alan3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_alan3.setText("Alan 3");
@@ -85,41 +93,46 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
         jTextField_alan1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField_alan1.setText("jTextField1");
 
+        jButton_kaydet.setText("Kaydet");
+        jButton_kaydet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_kaydetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_aciklama))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_alan6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_alan6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_alan5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_alan5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_alan4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldalan4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_alan3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_alan3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_alan1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_alan1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_alan2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_alan2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton_kaydet, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_alan6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_alan6))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_alan5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_alan5))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_alan4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_alan4))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_alan3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_alan3))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_alan1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_alan1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_alan2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_alan2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,7 +152,7 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel_alan3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldalan4)
+                    .addComponent(jTextField_alan4)
                     .addComponent(jLabel_alan4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,15 +162,29 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_alan6)
                     .addComponent(jLabel_alan6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_aciklama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_kaydet, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_kaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_kaydetActionPerformed
+        // TODO add your handling code here:
+        db.alanlar.set(0, jTextField_alan1.getText());
+        db.alanlar.set(1, jTextField_alan2.getText());
+        db.alanlar.set(2, jTextField_alan3.getText());
+        db.alanlar.set(3, jTextField_alan4.getText());
+        db.alanlar.set(4, jTextField_alan5.getText());
+        db.alanlar.set(5, jTextField_alan6.getText());
+        
+        db.writeAlan();
+        this.dispose();
+    }//GEN-LAST:event_jButton_kaydetActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -195,19 +222,18 @@ public class AlanAyarJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel_aciklama;
+    private javax.swing.JButton jButton_kaydet;
     private javax.swing.JLabel jLabel_alan1;
     private javax.swing.JLabel jLabel_alan2;
     private javax.swing.JLabel jLabel_alan3;
     private javax.swing.JLabel jLabel_alan4;
     private javax.swing.JLabel jLabel_alan5;
     private javax.swing.JLabel jLabel_alan6;
-    private javax.swing.JTextField jTextField_aciklama;
     private javax.swing.JTextField jTextField_alan1;
     private javax.swing.JTextField jTextField_alan2;
     private javax.swing.JTextField jTextField_alan3;
+    private javax.swing.JTextField jTextField_alan4;
     private javax.swing.JTextField jTextField_alan5;
     private javax.swing.JTextField jTextField_alan6;
-    private javax.swing.JTextField jTextFieldalan4;
     // End of variables declaration//GEN-END:variables
 }

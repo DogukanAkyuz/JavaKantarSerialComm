@@ -152,6 +152,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextField_aciklama" pref="372" max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButton_kaydet" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -194,7 +198,9 @@
                       <Component id="jLabel_aciklama" min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="jTextField_aciklama" min="-2" pref="164" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="136" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jButton_kaydet" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="95" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -283,6 +289,14 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="A&#xe7;&#x131;klama"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton_kaydet">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="KAYDET"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_kaydetActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
